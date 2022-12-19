@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import useMarvelService from '../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './comicsList.scss';
-// import uw from '../../resources/img/UW.png';
-// import xMen from '../../resources/img/x-men.png';
 
 const ComicsList = (props) => {
     const [comicList, setComicList] = useState([]);
@@ -39,31 +39,15 @@ const ComicsList = (props) => {
 
     function renderComics(arr) {
         const items = arr.map((item,i) => {
-            // let imgStyle = {'objectFit': 'cover'}
-            // if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
-            //     imgStyle = {'objectFit': 'unset'}
-            // }
             return (
                 <li className="comics__item"
                     tabIndex={0}
-                    // ref={el => itemRefs.current[i] = el}
-                    key={item.id}
-                    // onClick={() => {
-                    //     props.onCharSelected(item.id)
-                    //     focusOnItem(i)
-                    // }}
-                    // onKeyPress={(e) => {
-                    //     if (e.key === ' ' || e.key === 'Enter') {
-                    //         props.onCharSelected(item.id)
-                    //         focusOnItem(i)
-                    //     }
-                    // }}
-                    >
-                    <a href="#">
+                    key={item.id}>
+                    <Link to={`/comics/${item.id}`}>
                         <img src={item.thumbnail} alt={item.title} className="comics__item-img"/>
                         <div className="comics__item-name">{item.title}</div>
                         <div className="comics__item-price">{item.price}</div>
-                    </a>
+                    </Link>
                 </li>
             )
         })
